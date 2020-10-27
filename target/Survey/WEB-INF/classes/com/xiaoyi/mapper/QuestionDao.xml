@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoyi.mapper.QuestionDao">
+
+  <resultMap id="QuestionMap" type="com.xiaoyi.entity.Question">
+    <id column="id" property="id"/>
+    <result column="title" property="title"/>
+    <result column="remark" property="remark"/>
+    <result column="type" property="type"/>
+    <result column="required" property="required"/>
+    <result column="check_style" property="checkStyle"/>
+    <result column="order_style" property="orderStyle"/>
+    <result column="show_style" property="showStyle"/>
+    <result column="test" property="test"/>
+    <result column="score" property="score"/>
+    <result column="orderby" property="orderby"/>
+    <result column="creator" property="creator"/>
+    <result column="create_time" property="createTime"/>
+  </resultMap>
+  <insert id="create" parameterType="Question" keyProperty="id" useGeneratedKeys="true">
+    insert into survey.tb_question(id, title, remark, type, required, check_style, order_style, show_style, test, score, orderby, creator, create_time, survey_id)
+    VALUES (#{id},#{title},#{remark},#{type},#{required},#{checkStyle},#{orderStyle},#{showStyle},#{test},#{score},#{orderby},#{creator},#{createTime},#{surveyId})
+  </insert>
+
+  <sql id="QuestionFind">
+    <where>
+      <if test="id != null">and id = #{id}</if>
+      <if test="title != null and title != ''">and title = #{title}</if>
+      <if test="remark != null">and remark = #{remark}</if>
+      <if test="type != null and type != ''">and type = #{type}</if>
+      <if test="required != null">and required = #{required}</if>
+      <if test="checkStyle != null">and check_style = #{checkStyle}</if>
+      <if test="orderStyle != null">and order_style = #{orderStyle}</if>
+      <if test="showStyle != null">and show_style = #{showStyle}</if>
+      <if test="test != null">and test = #{test}</if>
+      <if test="score != null">and score = #{score}</if>
+      <if test="orderby != null">and orderby = #{orderby}</if>
+      <if test="creator != null and creator != ''">and creator = #{creator}</if>
+      <if test="createTime != null">and create_time = #{createTime}</if>
+    </where>
+  </sql>
+
+  <delete id="delete">
+    delete from tb_question
+    <include refid="QuestionFind"/>
+  </delete>
+
+  <select id="count" resultType="int">
+    select count(1) from tb_question
+    <include refid="QuestionFind"/>
+  </select>
+
+  <select id="query" resultMap="QuestionMap">
+    select * from tb_question
+    <include refid="QuestionFind"/>
+  </select>
+
+  <select id="detail" resultMap="QuestionMap">
+    select * from tb_question
+    <include refid="QuestionFind"/>
+    limit 1
+  </select>
+  <sql id="QuestionUpdate">
+    <set>
+      <if test="updateId != null">id = #{updateId},</if>
+      <if test="updateTitle != null">title = #{updateTitle},</if>
+      <if test="updateRemark != null"> remark = #{updateRemark},</if>
+      <if test="updateType != null">type = #{updateType},</if>
+      <if test="updateRequired != null"> required = #{updateRequired},</if>
+      <if test="updateCheckStyle != null"> check_style = #{updateCheckStyle},</if>
+      <if test="updateOrderStyle != null"> order_style = #{updateOrderStyle},</if>
+      <if test="updateShowStyle != null">show_style = #{updateShowStyle},</if>
+      <if test="updateTest != null">test = #{updateTest},</if>
+      <if test="updateScore != null">score = #{updateScore},</if>
+      <if test="updateOrderby != null">orderby = #{updateOrderby},</if>
+      <if test="updateCreator != null">creator = #{updateCreator},</if>
+      <if test="updateCreateTime != null">create_time = #{updateCreateTime}</if>
+    </set>
+  </sql>
+  <update id="update">
+    update tb_question
+    <include refid="QuestionUpdate"/>
+    <include refid="QuestionFind"/>
+  </update>
+
+</mapper>

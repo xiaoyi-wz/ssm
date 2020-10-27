@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MyBatisGeneratorConfiguration">
+    <option name="credentials">
+      <map>
+        <entry key="jdbc:mysql://localhost/survey?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;useJDBCCompliantTimezoneShift=true&amp;serverTimezone=UTC">
+          <value>
+            <Credential>
+              <option name="username" value="root" />
+            </Credential>
+          </value>
+        </entry>
+        <entry key="jdbc:mysql://localhost/survey?useUnicode=true&amp;characterEncoding=UTF-8&amp;useJDBCCompliantTimezoneShift=true&amp;serverTimezone=UTC">
+          <value>
+            <Credential>
+              <option name="username" value="root" />
+            </Credential>
+          </value>
+        </entry>
+        <entry key="jdbc:mysql://localhost/survey?useUnicode=true&amp;characterEncoding=UTF-8&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC">
+          <value>
+            <Credential>
+              <option name="username" value="root" />
+            </Credential>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="tableConfigs">
+      <map>
+        <entry key="tb_answer_opt">
+          <value>
+            <TableConfig>
+              <option name="basePackage" value="com.xiaoyi" />
+              <option name="comment" value="true" />
+              <option name="domainName" value="answerOpt" />
+              <option name="domainPackage" value="com.xiaoyi.entity" />
+              <option name="exampleName" value="answerOptExample" />
+              <option name="examplePackage" value="com.xiaoyi.example" />
+              <option name="examplePostfix" value="Example" />
+              <option name="mapperName" value="answerOptMapper" />
+              <option name="mapperPackage" value="com.xiaoyi.mapper" />
+              <option name="mapperPostfix" value="Mapper" />
+              <option name="moduleRootPath" value="$PROJECT_DIR$" />
+              <option name="name" value="tb_answer_opt" />
+              <option name="primaryKey" value="id" />
+              <option name="resourcePath" value="src/main/resources" />
+              <option name="sourcePath" value="src/main/java" />
+              <option name="tableName" value="tb_answer_opt" />
+              <option name="xmlPackage" value="mapper" />
+            </TableConfig>
+          </value>
+        </entry>
+        <entry key="tb_answer_txt">
+          <value>
+            <TableConfig>
+              <option name="basePackage" value="com.xiaoyi" />
+              <option name="comment" value="true" />
+              <option name="domainName" value="TbAnswerTxt" />
+              <option name="domainPackage" value="com.xiaoyi.entity" />
+              <option name="exampleName" value="TbAnswerTxtExample" />
+              <option name="examplePackage" value="com.xiaoyi.example" />
+              <option name="examplePostfix" value="Example" />
+              <option name="mapperName" value="TbAnswerTxtMapper" />
+              <option name="mapperPackage" value="com.xiaoyi.mapper" />
+              <option name="mapperPostfix" value="Mapper" />
+              <option name="moduleRootPath" value="$PROJECT_DIR$" />
+              <option name="name" value="tb_answer_txt" />
+              <option name="primaryKey" value="id" />
+              <option name="resourcePath" value="src/main/resources" />
+              <option name="sourcePath" value="src/main/java" />
+              <option name="tableName" value="tb_answer_txt" />
+              <option name="xmlPackage" value="mapper" />
+            </TableConfig>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

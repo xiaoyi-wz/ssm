@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoyi.mapper.SurveyDao">
+
+<resultMap id="SurveyMap" type="com.xiaoyi.entity.Survey">
+  <id column="ID" jdbcType="INTEGER" property="id" />
+  <result column="title" jdbcType="VARCHAR" property="title" />
+  <result column="remark" jdbcType="VARCHAR" property="remark" />
+  <result column="bounds" jdbcType="INTEGER" property="bounds" />
+  <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+  <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+  <result column="rules" jdbcType="INTEGER" property="rules" />
+  <result column="password" jdbcType="VARCHAR" property="password" />
+  <result column="url" jdbcType="VARCHAR" property="url" />
+  <result column="state" jdbcType="VARCHAR" property="state" />
+  <result column="logo" jdbcType="VARCHAR" property="logo" />
+  <result column="bgimg" jdbcType="VARCHAR" property="bgimg" />
+  <result column="anon" jdbcType="INTEGER" property="anon" />
+  <result column="creator" jdbcType="INTEGER" property="creator" />
+  <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+
+</resultMap>
+<insert id="create" parameterType="Survey" keyProperty="id" useGeneratedKeys="true">
+  insert into tb_survey (title, remark, bounds,
+                         start_time, end_time, rules,
+                         `password`, url, `state`,
+                         logo, bgimg, anon,
+                         creator, create_time)
+  values (#{title}, #{remark}, #{bounds},
+          #{startTime}, #{endTime}, #{rules},
+          #{password}, #{url}, #{state},
+          #{logo}, #{bgimg}, #{anon},
+          #{creator}, #{createTime})
+</insert>
+
+<sql id="SurveyFind">
+  <where>
+    <if test="id != null and id != ''">and id = #{id}</if>
+    <if test="title != null and title != ''">and title = #{title}</if>
+    <if test="remark != null and remark != ''">and remark = #{remark}</if>
+    <if test="startTime != null and startTime != ''">and start_time = #{startTime}</if>
+    <if test="endTime != null and endTime != ''">and end_time = #{endTime}</if>
+    <if test="rules != null and rules != ''">and rules = #{rules}</if>
+    <if test="password != null and password != ''">and password = #{password}</if>
+    <if test="url != null and url != ''">and url = #{url}</if>
+    <if test="state != null and state != ''">and state = #{state}</if>
+    <if test="anon != null">and anon = #{anon}</if>
+    <if test="creator != null and creator != ''">and creator = #{creator}</if>
+    <if test="createTime != null ">and create_time = #{createTime}</if>
+  </where>
+</sql>
+
+<delete id="delete">
+  delete from tb_survey
+  <include refid="SurveyFind"/>
+
+</delete>
+
+<select id="count" resultType="int">
+  select count(1) from tb_survey
+  <include refid="SurveyFind"/>
+</select>
+
+<select id="query" resultMap="SurveyMap">
+  select * from tb_survey
+  <include refid="SurveyFind"/>
+</select>
+
+<select id="detail" resultMap="SurveyMap">
+  select * from tb_survey
+  <include refid="SurveyFind"/>
+  limit 1
+</select>
+<sql id="SurveyUpdate">
+  <set>
+    <if test="updateId != null and updateId != ''">Id = #{updateId},</if>
+    <if test="updateTitle != null and updateTitle != ''">title = #{updateTitle},</if>
+    <if test="updateRemark != null and updateRemark != ''">remark = #{updateRemark},</if>
+    <if test="updateStartTime != null"> start_time = #{updateStartTime},</if>
+    <if test="updateEndTime != null ">end_time = #{updateEndTime},</if>
+    <if test="updateRules != null and updateRules != ''">rules = #{updateRules},</if>
+    <if test="updatePassword != null and updatePassword != ''">password = #{updatePassword},</if>
+    <if test="updateUrl != null and updateUrl != ''">url = #{updateUrl},</if>
+    <if test="updateState != null and updateState != ''">state = #{updateState},</if>
+    <if test="updateLogo != null and updateLogo != ''">logo = #{updateLogo},</if>
+    <if test="updateBgimg != null and updateBgimg != ''">bgimg = #{updateBgimg},</if>
+    <if test="updateAnon != null "> anon = #{updateAnon},</if>
+    <if test="updateCreator != null and updateCreator != ''"> creator = #{updateCreator},</if>
+    <if test="updateCreateTime != null"> create_time = #{updateCreateTime}</if>
+  </set>
+</sql>
+<update id="update">
+  update tb_survey
+  <include refid="SurveyUpdate"/>
+  <include refid="SurveyFind"/>
+</update>
+
+</mapper>

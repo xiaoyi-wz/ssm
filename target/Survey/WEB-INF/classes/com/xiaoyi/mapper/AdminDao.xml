@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoyi.mapper.AdminDao">
+    
+    <resultMap id="AdminMap" type="com.xiaoyi.entity.Admin">
+        <id column="id" property="id"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <insert id="create" parameterType="admin" keyProperty="id" useGeneratedKeys="true">
+        insert into survey.tb_admin(account, password, name, phone, remark)
+        VALUES (#{account},#{password},#{name},#{phone},#{remark})
+    </insert>
+
+    <sql id="AdminFind">
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="account != null and account != ''">
+            and account = #{account}
+            </if>
+            <if test="password != null and password != ''"> and password = #{password} </if>
+            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+            <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+        </where>
+    </sql>
+
+    <delete id="delete">
+        delete from survey.tb_admin
+        <include refid="AdminFind"/>
+    </delete>
+
+    <select id="count" resultType="int">
+        select count(1) from tb_admin
+        <include refid="AdminFind"/>
+    </select>
+
+    <select id="query" resultMap="AdminMap">
+        select * from tb_admin
+        <include refid="AdminFind"/>
+    </select>
+
+    <select id="detail" resultMap="AdminMap">
+        select * from tb_admin
+        <include refid="AdminFind"/>
+        limit 1
+    </select>
+    <sql id="AdminUpdate">
+        <set>
+            <if test="updateId != null and updateId != ''">id = #{updateId},</if>
+            <if test="updateAccount != null  and updateAccount != ''">account = #{updateAccount},</if>
+            <if test="updatePassword != null and updatePassword != ''">password = #{updatePassword},</if>
+            <if test="updateName != null and updateName != ''">name = #{updateName},</if>
+            <if test="updatePhone != null and updatePhone != ''">phone = #{updatePhone },</if>
+            <if test="updateRemark != null and updateRemark != ''"> remark = #{updateRemark}</if>
+        </set>
+    </sql>
+    <update id="update" >
+        update survey.tb_admin
+        <include refid="AdminUpdate"/>
+        <include refid="AdminFind"/>
+    </update>
+
+</mapper>
